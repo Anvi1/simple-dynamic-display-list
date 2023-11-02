@@ -5,11 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { DisplayListComponent } from './display-list/display-list.component';
 import { AppRoutingModule } from './app-routing.module';
+import { FavoritesListComponent } from './favorites-list/favorites-list/favorites-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DisplayListComponent
+    DisplayListComponent,
+    FavoritesListComponent
   ],
   imports: [
     BrowserModule,

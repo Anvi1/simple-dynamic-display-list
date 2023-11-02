@@ -25,4 +25,8 @@ export class DisplayListComponent implements OnInit {
     );
   }
 
+  favouriteIconClicked(item: DisplayListData) {
+    item.is_favorite = !item.is_favorite
+  }
+
 }

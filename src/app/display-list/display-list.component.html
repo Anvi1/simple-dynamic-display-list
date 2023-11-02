@@ -1,3 +1,14 @@
-<ul>
-    <li *ngFor="let item of list">{{ item.first_name }} {{ item.last_name }}</li>
-</ul>
+<div class="favorites-link"> 
+    <a routerLink="/favorites"> Go To Favorites </a>
+</div>
+<div class="item-list">
+    <div class="item" *ngFor="let item of list">
+      <div class="image-container">
+        <img [src]="item.avatar" class="item-image" alt="Item Image" />
+        <i class="fa fa-heart-o" (click)="favouriteIconClicked(item)" *ngIf="!item.is_favorite"></i>
+        <i class="fa fa-heart" (click)="favouriteIconClicked(item)" *ngIf="item.is_favorite"></i>
+      </div>
+      <h3>{{ item.first_name }} {{ item.last_name }}</h3>
+      <p>{{ item.email }}</p>
+    </div>
+</div>

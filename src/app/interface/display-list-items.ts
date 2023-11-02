@@ -16,4 +16,5 @@ export interface DisplayListData {
   first_name: string,
   last_name: string,
   avatar: string
+  is_favorite: boolean
 }

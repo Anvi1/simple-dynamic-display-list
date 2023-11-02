@@ -1,0 +1,46 @@
+.favorites-link {
+    margin: 20px;
+    font-weight: bold;
+    text-align: end;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.item-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2%;
+  }
+  
+.item {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.image-container {
+    position: relative;
+    width: 200px; /* Adjust the width and height as needed */
+    height: 150px;
+  }
+  
+  .item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio and cover container */
+  }
+  
+  i {
+    position: absolute;
+    top: 0; /* Position the icon at the top */
+    right: 0; /* Position the icon at the right */
+    font-size: 24px; /* Adjust the font size as needed */
+    color: white; /* Icon color */
+    background: rgba(0, 0, 0, 0.5); /* Background color with transparency */
+    padding: 10px; /* Adjust padding for spacing */
+    border-radius: 0 0 0 20px; /* Round the top-right corner */
+    cursor: pointer;
+  }
+  
