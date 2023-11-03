@@ -9,6 +9,7 @@ import { DisplayListData } from '../interface/display-list-items';
 })
 export class DisplayListComponent implements OnInit {
   list: DisplayListData[] = [];
+  fetchUsersInterval!: any;
 
   constructor(private displayListService: DisplayListService) { }
 
@@ -23,10 +24,27 @@ export class DisplayListComponent implements OnInit {
         console.log('Subscription completed.'); // Log when the subscription is completed.
       }
     );
+
+    this.fetchNewUsers();
   }
 
   favouriteIconClicked(item: DisplayListData) {
     item.is_favorite = !item.is_favorite
+  }
+
+  fetchNewUsers() {
+    this.fetchUsersInterval = setInterval(() => {
+      this.displayListService.getSingleUser().subscribe(data => {
+        this.list.push(data);
+        if (this.list.length > 10) {
+          this.list.shift(); // Remove the oldest user
+        }
+        // Check the stop condition here
+      if (data.id === data.totalItems) {
+        clearInterval(this.fetchUsersInterval);
+      }
+      });
+    }, 5000); // Fetch every 5 seconds
   }
 
 }

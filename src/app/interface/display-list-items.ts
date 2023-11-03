@@ -4,10 +4,7 @@ export interface RawDisplayListData {
   total: number,
   total_pages: number,
   data: DisplayListData[],
-  support:{
-    url: string,
-    text: string
-  }
+  support: Support
 }
 
 export interface DisplayListData {
@@ -16,5 +13,16 @@ export interface DisplayListData {
   first_name: string,
   last_name: string,
   avatar: string
-  is_favorite: boolean
+  is_favorite: boolean,
+  totalItems?: number
+}
+
+export interface SingleUserData {
+  data: DisplayListData,
+  support: Support
+}
+
+interface Support {
+  url: string,
+  text: string
 }
