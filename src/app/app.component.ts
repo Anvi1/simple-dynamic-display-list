@@ -11,11 +11,13 @@ import { DisplayListData } from './interface/display-list-items';
 export class AppComponent implements OnInit {
 
   defaultDisplayList!: DisplayListData[];
+  title = 'simple-dynamic-display-list';
 
   constructor(private fetchNewUserService: NewUserService,
     ) {}
 
   ngOnInit() {
+    // Start fetching new data in background every 5 seconds
     this.fetchNewUserService.startFetchingNewData$.subscribe(() => {
       this.fetchNewUserService.startFetchingNewUsers();
     },

@@ -10,7 +10,7 @@ export class FetchSingleUserApiService {
 
   constructor (private readonly http: HttpClient) { }
 
-  fetchSingleUser(totalItems: number) {
-    return this.http.get(`${this.apiURL}/${totalItems}`)
+  fetchSingleUser(ItemId: number) {
+    return this.http.get(`${this.apiURL}/${ItemId}`)
   }
 }

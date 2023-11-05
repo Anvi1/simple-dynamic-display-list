@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
 import { DisplayListData } from 'src/app/interface/display-list-items';
 import { FavoritesListService } from 'src/app/services/favorites-list-service/favorites-list.service';
 
@@ -11,8 +10,7 @@ import { FavoritesListService } from 'src/app/services/favorites-list-service/fa
 export class FavoritesListComponent {
   favorites: DisplayListData[] = [];
 
-  constructor(private favoriteService: FavoritesListService,
-    private location: Location) { }
+  constructor(private favoriteService: FavoritesListService) { }
 
   ngOnInit() {
     this.favoriteService.getFavorites().subscribe(data => {

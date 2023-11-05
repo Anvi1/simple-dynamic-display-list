@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, Subscription, catchError, interval, map, throwError } from 'rxjs';
+import { Observable, Subject, catchError, map, throwError } from 'rxjs';
 import { DisplayListData, SingleUserData } from 'src/app/interface/display-list-items';
 import { FetchSingleUserApiService } from '../api-service/fetch-single-user-api.service';
 import { DisplayListService } from '../display-list-service/display-list.service';
@@ -74,7 +74,7 @@ export class NewUserService {
             this.displayList.shift(); // Remove the oldest user
           }
           this.displayListService.setDisplayList(this.displayList);
-          // Check the stop condition here
+          // Check the stop condition here, if user id reached to maximum of total items in data then stop fetching
           if (data.id === data.totalItems) {
           clearInterval(this.fetchUsersInterval);
           }

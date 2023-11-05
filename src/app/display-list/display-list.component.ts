@@ -42,9 +42,6 @@ export class DisplayListComponent implements OnInit {
       (error) => {
           this.displayErrorWarning = true;
           console.error('Component level error:', error);
-        },
-      () => {
-          console.log('Subscription completed.'); // Log when the subscription is completed.
         }
       );
     }
