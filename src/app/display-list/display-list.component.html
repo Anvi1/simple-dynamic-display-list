@@ -1,9 +1,15 @@
+<div class="displayWarningMessage" *ngIf="displayErrorWarning">
+  <span>"There's some error, please check your network"</span>
+</div>
+
 <div class="favorites-link"> 
     <a routerLink="/favorites"> Go To Favorites </a>
 </div>
-<div class="displayAddToFavoritesWarningMessage" *ngIf="displayAddToFavoritesWarning">
+
+<div class="displayWarningMessage" *ngIf="displayAddToFavoritesWarning">
  <span>"You can add upto 10 items in favorites"</span>
 </div>
+
 <div class="item-list">
     <div class="item" *ngFor="let item of list">
       <div class="image-container">

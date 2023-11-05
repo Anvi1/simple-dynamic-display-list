@@ -31,7 +31,6 @@ export class DisplayListService {
         }),
         catchError((error) => {
           console.error('Service level error:', error);
-          // Optionally, you can return an empty array or a default value
           return throwError(() => 'Simulated error');
         })
       );

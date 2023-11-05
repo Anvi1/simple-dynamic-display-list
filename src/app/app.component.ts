@@ -13,12 +13,15 @@ export class AppComponent implements OnInit {
   defaultDisplayList!: DisplayListData[];
 
   constructor(private fetchNewUserService: NewUserService,
-    private displayListService: DisplayListService
     ) {}
 
   ngOnInit() {
     this.fetchNewUserService.startFetchingNewData$.subscribe(() => {
       this.fetchNewUserService.startFetchingNewUsers();
-    });
+    },
+    (error) => {
+        console.error('Component level error:', error);
+      },
+    );
   }
 }

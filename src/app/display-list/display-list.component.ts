@@ -13,6 +13,7 @@ export class DisplayListComponent implements OnInit {
   list: DisplayListData[] | undefined;
   fetchUsersInterval!: any;
   displayAddToFavoritesWarning: boolean = false;
+  displayErrorWarning: boolean = false;
 
   constructor(
     private displayListService: DisplayListService,
@@ -21,17 +22,25 @@ export class DisplayListComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+
+    // Check if data is already cached in 'list service'
     this.displayListService.getList().subscribe((displayList) => {
       this.list = displayList;
     });
 
     if(this.list?.length === 0){
       this.displayListService.getDisplayListFromApi().subscribe(data => {
+        this.displayErrorWarning = false;
+
         this.list = data;
         this.displayListService.setDisplayList(data);
+
+        //Start the trigger of fetching new users once default data is stored
         this.fetchNewUserService.startFetchingNewUsers();
+
         },
       (error) => {
+          this.displayErrorWarning = true;
           console.error('Component level error:', error);
         },
       () => {

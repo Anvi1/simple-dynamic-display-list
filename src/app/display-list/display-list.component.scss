@@ -22,7 +22,7 @@
 
 .image-container {
     position: relative;
-    width: 200px; /* Adjust the width and height as needed */
+    width: 200px;
     height: 150px;
   }
   
@@ -44,7 +44,7 @@
     cursor: pointer;
   }
 
-  .displayAddToFavoritesWarningMessage{
+  .displayWarningMessage{
     font-size: 20px;
     text-align: center;
     color: red;
