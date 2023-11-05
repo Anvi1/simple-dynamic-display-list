@@ -1,1 +1,12 @@
-<p>favorites-list works!</p>
+<div class="favorites-link"> 
+    <a routerLink="/display-list"> Go Back </a>
+</div>
+<div class="item-list">
+    <div class="item" *ngFor="let item of favorites">
+      <div class="image-container">
+        <img [src]="item.avatar" class="item-image" alt="Item Image" />
+      </div>
+      <h3>{{ item.first_name }} {{ item.last_name }}</h3>
+      <p>{{ item.email }}</p>
+    </div>
+</div>

@@ -1,6 +1,9 @@
 <div class="favorites-link"> 
     <a routerLink="/favorites"> Go To Favorites </a>
 </div>
+<div class="displayAddToFavoritesWarningMessage" *ngIf="displayAddToFavoritesWarning">
+ <span>"You can add upto 10 items in favorites"</span>
+</div>
 <div class="item-list">
     <div class="item" *ngFor="let item of list">
       <div class="image-container">

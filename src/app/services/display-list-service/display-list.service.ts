@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { FetchDisplayListServiceApi } from '../api-service/fetch-display-list-api.service'
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { DisplayListData, RawDisplayListData, SingleUserData } from 'src/app/interface/display-list-items';
 import { FetchSingleUserApiService } from '../api-service/fetch-single-user-api.service';
@@ -11,12 +11,14 @@ import { FetchSingleUserApiService } from '../api-service/fetch-single-user-api.
 export class DisplayListService {
   private totalItems!: number;
   private currentItemId!: number;
+  private displayListSubject = new BehaviorSubject<DisplayListData[]>([]);
+  displayList$ = this.displayListSubject.asObservable();
+
   constructor (
     private readonly listService: FetchDisplayListServiceApi,
-    private readonly singleUserService: FetchSingleUserApiService,
     ) { }
 
-    getDisplayList(): Observable<DisplayListData[]> {
+    getDisplayListFromApi(): Observable<DisplayListData[]> {
       return this.listService.fetchDisplayList().pipe(
         map((response: any) => {
           if (response && response.data) {
@@ -35,32 +37,38 @@ export class DisplayListService {
       );
     }
 
-  getSingleUser(): Observable<DisplayListData> {
-    this.getSingleUserId();
-    return this.singleUserService.fetchSingleUser(this.currentItemId).pipe(
-      map((response: Object) => {
-        const displayData = (response as SingleUserData).data as DisplayListData;
-        // Include your additional variable in the result
-        displayData.totalItems = this.totalItems;
-        return displayData;
-      }),
-      catchError((error) => {
-        console.error('Service level error:', error);
-        // Optionally, you can return an empty array or a default value
-        return throwError(() => 'Simulated error');
-        //return throwError('Simulated error'); // Import 'of' from 'rxjs' if not already imported
-      })
-    );
+  getDefaultItemId() {
+    return this.currentItemId;
+  }  
+
+  getTotalItemsNumber() {
+    return this.totalItems;
+  } 
+
+  setList(data: DisplayListData[]) {
+    this.displayListSubject.next(data);
   }
 
-  getSingleUserId() {
-    if(this.currentItemId < this.totalItems){
-      this.currentItemId++
-    }
-    else{
-      this.currentItemId = this.totalItems;
-    }
+  getList(): Observable<DisplayListData[]> {
+    return this.displayList$;
   }
+
+  setDisplayList(data: DisplayListData[]) {
+    this.setList(data);
+  }
+
+  getDisplayList() {
+    this.getList().subscribe((displayList) => {
+      if(displayList.length>0){
+        this.setList(displayList)
+        return displayList;
+      }
+      else{
+        return [];
+      }     
+    });
+  }
+
 }
 
 
